@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/buttonConnection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/connection_button_to_connect" />
+
+    <TextView
+        android:id="@+id/textViewIterationLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewWeightLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonConnection"
+        tools:text="@string/iteration_label" />
+
+    <TextView
+        android:id="@+id/textViewWeightLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewForceLabel"
+        app:layout_constraintStart_toEndOf="@+id/textViewIterationLabel"
+        app:layout_constraintTop_toBottomOf="@+id/buttonConnection"
+        tools:text="@string/weight_label" />
+
+    <TextView
+        android:id="@+id/textViewForceLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTimeLabel"
+        app:layout_constraintStart_toEndOf="@+id/textViewWeightLabel"
+        app:layout_constraintTop_toBottomOf="@+id/buttonConnection"
+        tools:text="@string/force_label" />
+
+    <TextView
+        android:id="@+id/textViewTimeLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewAlertLabel"
+        app:layout_constraintStart_toEndOf="@+id/textViewForceLabel"
+        app:layout_constraintTop_toBottomOf="@+id/buttonConnection"
+        tools:text="@string/time_label" />
+
+    <TextView
+        android:id="@+id/textViewAlertLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewTimeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/buttonConnection"
+        tools:text="@string/alert_label" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvDataReceived"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvSentDataLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewIterationLabel" />
+
+    <TextView
+        android:id="@+id/tvSentDataLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvDataSent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="@string/data_sent"/>
+
+    <TextView
+        android:id="@+id/tvDataSent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/etSentData"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="@string/data_sent" />
+
+
+    <EditText
+        android:id="@+id/etSentData"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="4dp"
+        android:hint="@string/send_data"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSend"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="@string/send_data" />
+
+    <Button
+        android:id="@+id/buttonSend"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/send_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

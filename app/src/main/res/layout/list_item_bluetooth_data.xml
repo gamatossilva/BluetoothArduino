@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp">
+
+
+    <TextView
+        android:id="@+id/textViewIteration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewWeight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/iteration_label" />
+
+
+    <TextView
+        android:id="@+id/textViewWeight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewForce"
+        app:layout_constraintStart_toEndOf="@+id/textViewIteration"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/weight_label" />
+
+
+    <TextView
+        android:id="@+id/textViewForce"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTime"
+        app:layout_constraintStart_toEndOf="@+id/textViewWeight"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/force_label" />
+
+
+    <TextView
+        android:id="@+id/textViewTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewAlert"
+        app:layout_constraintStart_toEndOf="@+id/textViewForce"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/time_label" />
+
+
+    <TextView
+        android:id="@+id/textViewAlert"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewTime"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/alert_label" />
+
+
+</android.support.constraint.ConstraintLayout>

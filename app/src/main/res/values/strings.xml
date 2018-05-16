@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">Bluetooth Arduino</string>
+
+    <!-- Label text-->
+    <string name="data_sent_label">Dado enviado</string>
+    <string name="data_sent">Dado enviado</string>
+
+    <!-- Text displayed in the edit text after the connection has been established-->
+    <string name="send_data">Digite sua massa</string>
+
+    <!-- Texts for buttons-->
+    <string name="send_button">Enviar</string>
+    <string name="scan_button">Procurar por dispositivos</string>
+    <string name="connection_button_to_connect">Conectar</string>
+    <string name="connection_button_to_disconnect">Desconectar</string>
+
+    <!-- Labels for text viwes on device list layout-->
+    <string name="paired_devices_label">Dispositivos pareados</string>
+    <string name="new_devices_label">Outros dispositivos disponíveis</string>
+
+    <!-- Labels for text views on list item -->
+    <string name="iteration_label">Iteração</string>
+    <string name="weight_label">Massa</string>
+    <string name="force_label">Força</string>
+    <string name="time_label">Tempo</string>
+    <string name="alert_label">Alerta</string>
+
+    <!-- Messages displayed when no device is found-->
+    <string name="no_devices_paired">Nenhum dispositivo pareado</string>
+    <string name="no_new_devices">Nenhum dispositivo encontrado</string>
+
+    <!-- Toast messages-->
+    <string name="permission_not_granted_message">A permissão não foi concedida. A busca por dispositivos não poderá continuar!</string>
+    <string name="no_bluetooth_adapter">Seu dispositivo não possui bluetooth</string>
+    <string name="bluetooth_activated">Bluetooth foi ativado</string>
+    <string name="bluetooth_not_activated">Bluetooth não foi ativado</string>
+    <string name="not_connected_device">Não está conectado a um dispositivo</string>
+    <string name="device_connected">Conectado</string>
+    <string name="device_connecting">Conectando&#8230;</string>
+    <string name="device_not_connected">Não Conectado</string>
+    <string name="save_backup_successful_msg">Backup salvo com sucesso</string>
+    <string name="save_backup_fail_msg">Backup falhou</string>
+
+    <!-- Device list label-->
+    <string name="device_list_label">Selecione um dispositivo</string>
+
+    <!-- Message displayed when device was disconnected-->
+    <string name="disconnect_device">Sair</string>
+
+    <!-- Message displayed if the device send an alert message-->
+    <string name="alert_message_on">Sim</string>
+    <string name="alert_message_off">Não</string>
+
+    <string name="action_export">Exportar</string>
+    
+    <!-- Messages when the export button was clicked-->
+    <string name="delete_data_in_database_msg">Deseja excluir os dados do banco de dados?</string>
+    <string name="delete_data_in_database">Excluir</string>
+    <string name="keep_data_in_database">Manter</string>
+</resources>
