@@ -127,7 +127,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     Intent intent = new Intent(MainActivity.this, DeviceList.class);
                     startActivityForResult(intent, REQUEST_CONNECTION);
                     tvDataSent.setText("");
-                    //TODO (1): dado recebido
                 }
             }
         });
@@ -145,7 +144,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     mService.sendMessage(etSentData.getText().toString());
                     etSentData.setText("");
                 }
-                //TODO (2): dado recebido
             }
         });
     }
@@ -224,7 +222,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
             mService = binder.getService();
             connection = mService.isConnected();
-            mService.sendData();
             if (connection) {
                 connectionButton.setText(R.string.connection_button_to_disconnect);
             } else {
@@ -241,14 +238,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private final BroadcastReceiver mHandleMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            /*String message = intent.getExtras().getString(LocalService.DATA);
-            if (message.contains(getString(R.string.device_connected))) {
-                connectionButton.setText(R.string.connection_button_to_disconnect);
-                //TODO (3): dado recebido
-            } else {
-                //connectionButton.setText(R.string.connection_button_to_connect);
-                //TODO (4): dado recebido
-            }*/
             if (mService.isConnected()) {
                 connectionButton.setText(R.string.connection_button_to_disconnect);
             } else {

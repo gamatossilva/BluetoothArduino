@@ -57,4 +57,7 @@
     <string name="delete_data_in_database_msg">Deseja excluir os dados do banco de dados?</string>
     <string name="delete_data_in_database">Excluir</string>
     <string name="keep_data_in_database">Manter</string>
+
+    <!-- Message shown on notification-->
+    <string name="notification_text">Alerta</string>
 </resources>

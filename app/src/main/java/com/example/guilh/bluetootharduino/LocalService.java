@@ -92,26 +92,11 @@ public class LocalService extends Service {
         }
     }
 
-    public void sendData() {
-        if (connection) {
-            //sendBroadcastMessage(allData);
-        }
-    }
-
     public void setupChat() {
         if (mChatService == null) {
             mChatService = new BluetoothChatService(this, mHandler);
         }
     }
-
-    /*private void sendBroadcastMessage(String string) {
-        if (string != null) {
-            Intent intent = new Intent(ACTION_BLUETOOTH_BROADCAST);
-            intent.putExtra(DATA, string);
-            sendBroadcast(intent);
-        }
-    }*/
-
 
     private void sendBroadcastMessage() {
             Intent intent = new Intent(ACTION_BLUETOOTH_BROADCAST);
@@ -128,10 +113,6 @@ public class LocalService extends Service {
                         case BluetoothChatService.STATE_CONNECTED:
                             Toast.makeText(LocalService.this, getString(R.string.device_connected), Toast.LENGTH_SHORT).show();
                             connection = true;
-
-                            serviceData.delete(0, serviceData.length());
-                            //sendBroadcastMessage(getString(R.string.device_connected));
-                            //sendBroadcastMessage("");
                             sendBroadcastMessage();
                             break;
 
@@ -158,51 +139,58 @@ public class LocalService extends Service {
                     String received = (String) msg.obj;
                     ContentValues values = new ContentValues();
 
-                    String[] splited = received.split("\n");
+                    String[] data = received.split("\n");
                     ArrayList<String> dataArrayList = new ArrayList<>();
 
-                    for (String string : splited) {
+                    for (String string : data) {
                         if (!string.isEmpty() && !string.equals("{") && !string.equals("}")) {
-                            String[] splitedAgain = string.split(": ");
-                            dataArrayList.add(splitedAgain[1]);
+                            String[] dataInDatabase = string.split(": ");
+
+                            if (dataInDatabase.length == 2 && !dataInDatabase[0].isEmpty() && !dataInDatabase[1].isEmpty()) {
+                                dataArrayList.add(dataInDatabase[1]);
+                            }
                         }
                     }
 
-                    values.put(BluetoothArduinoContract.BluetoothArduinoEntry.COLUMN_ITERATION, Integer.parseInt(dataArrayList.get(0)));
-                    values.put(BluetoothArduinoContract.BluetoothArduinoEntry.COLUMN_WEIGHT, Float.parseFloat(dataArrayList.get(1)));
-                    values.put(BluetoothArduinoContract.BluetoothArduinoEntry.COLUMN_FORCE, Float.parseFloat(dataArrayList.get(2)));
-                    values.put(BluetoothArduinoContract.BluetoothArduinoEntry.COLUMN_TIME, Integer.parseInt(dataArrayList.get(3)));
-                    values.put(BluetoothArduinoContract.BluetoothArduinoEntry.COLUMN_ALERT, Integer.parseInt(dataArrayList.get(4)));
+                    if (dataArrayList.size() == 5) {
+
+                        values.put(BluetoothArduinoContract.BluetoothArduinoEntry.COLUMN_ITERATION, Integer.parseInt(dataArrayList.get(0)));
+                        values.put(BluetoothArduinoContract.BluetoothArduinoEntry.COLUMN_WEIGHT, Float.parseFloat(dataArrayList.get(1)));
+                        values.put(BluetoothArduinoContract.BluetoothArduinoEntry.COLUMN_FORCE, Float.parseFloat(dataArrayList.get(2)));
+                        values.put(BluetoothArduinoContract.BluetoothArduinoEntry.COLUMN_TIME, Integer.parseInt(dataArrayList.get(3)));
+                        values.put(BluetoothArduinoContract.BluetoothArduinoEntry.COLUMN_ALERT, Integer.parseInt(dataArrayList.get(4)));
 
 
-                    Uri newUri = getContentResolver().insert(BluetoothArduinoContract.BluetoothArduinoEntry.CONTENT_URI, values);
+                        Uri newUri = getContentResolver().insert(BluetoothArduinoContract.BluetoothArduinoEntry.CONTENT_URI, values);
 
-                    if (dataArrayList.get(4).equals("1")) {
-                        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getBaseContext())
-                                .setColor(ContextCompat.getColor(LocalService.this, R.color.colorPrimary))
-                                .setSmallIcon(R.drawable.ic_stat_name)
-                                .setVibrate(new long[]{0, 500})
-                                .setContentTitle(getString(R.string.app_name))
-                                .setContentText("Alerta")
-                                .setAutoCancel(true);
 
-                        Intent intent = new Intent(LocalService.this, MainActivity.class);
-                        TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(LocalService.this);
-                        taskStackBuilder.addNextIntentWithParentStack(intent);
+                        if (dataArrayList.get(4).equals("1")) {
+                            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getBaseContext())
+                                    .setColor(ContextCompat.getColor(LocalService.this, R.color.colorPrimary))
+                                    .setSmallIcon(R.drawable.ic_stat_name)
+                                    .setVibrate(new long[]{0, 500})
+                                    .setContentTitle(getString(R.string.app_name))
+                                    .setContentText(getString(R.string.notification_text))
+                                    .setAutoCancel(true);
 
-                        PendingIntent pendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                            Intent intent = new Intent(LocalService.this, MainActivity.class);
+                            TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(LocalService.this);
+                            taskStackBuilder.addNextIntentWithParentStack(intent);
 
-                        notificationBuilder.setContentIntent(pendingIntent);
+                            PendingIntent pendingIntent = taskStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-                        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                            notificationBuilder.setContentIntent(pendingIntent);
 
-                        notificationManager.notify(1, notificationBuilder.build());
-                        try {
-                            Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                            Ringtone ringtone = RingtoneManager.getRingtone(LocalService.this, sound);
-                            ringtone.play();
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+                            notificationManager.notify(1, notificationBuilder.build());
+                            try {
+                                Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                                Ringtone ringtone = RingtoneManager.getRingtone(LocalService.this, sound);
+                                ringtone.play();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
 
